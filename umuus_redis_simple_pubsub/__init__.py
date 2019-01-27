@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-"""Utilities, tools, and scripts for Python.
+"""A simple decorator functions for Redis' Pub/Sub on Python.
 
 umuus-redis-simple-pubsub
 =========================

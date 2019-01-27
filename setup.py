@@ -44,8 +44,8 @@ setup(
     include_package_data=True,
     zip_safe=True,
     name='umuus-redis-simple-pubsub',
-    description='Utilities, tools, and scripts for Python.',
-    long_description=('Utilities, tools, and scripts for Python.\n'
+    description="A simple decorator functions for Redis' Pub/Sub on Python.",
+    long_description=("A simple decorator functions for Redis' Pub/Sub on Python.\n"
  '\n'
  'umuus-redis-simple-pubsub\n'
  '=========================\n'
