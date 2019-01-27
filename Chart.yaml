@@ -1,0 +1,4 @@
+apiVersion: v1
+description: "Utilities, tools, and scripts for Python."
+name: umuus_redis_simple_pubsub
+version: 0.1
