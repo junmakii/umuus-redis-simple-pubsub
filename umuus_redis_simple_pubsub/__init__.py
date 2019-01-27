@@ -98,6 +98,18 @@ Usage
     4) "{'error': TypeError(\"can't multiply sequence by non-int of type 'float'\")}"
 
 
+----
+
+
+@subscribe()
+def f(x, y): return x * y
+
+
+import threading; threading.Thread(target=lambda: listen()).start()
+
+f.dispatch(x=2, y=2).wait()  # 4
+
+
 Authors
 -------
 
@@ -188,6 +200,32 @@ class Subscription(object):
     def __attrs_post_init__(self):
         self.name = to_keyname(self.fn)
 
+    def __call__(self, *args, **kwargs):
+        return self.fn(*args, **kwargs)
+
+    def dispatch(self, *args, **kwargs):
+        self.current_task_id = str(uuid.uuid4())
+        instance.publish(self.name + ':on_next:' + self.current_task_id,
+                         serializer(kwargs))
+        return self
+
+    def wait(self):
+        pubsub = instance.pubsub()
+        pubsub.psubscribe([self.name + ':*:' + self.current_task_id])
+        while True:
+            message = pubsub.get_message()
+            if message and message.get('type') == 'pmessage':
+                name, event, id = message['channel'].decode(encoding).rsplit(
+                    ':', 2)
+                data = normalizer(message['data'].decode(encoding))
+                pubsub.unsubscribe()
+                if event == 'on_completed':
+                    return data.get('data')
+                else:
+                    raise Exception(data.get('error'))
+                break
+            time.sleep(0.1)
+
 
 def to_keyname(fn):
     return fn.__module__ + ':' + fn.__qualname__
@@ -219,7 +257,7 @@ def listen():
 def subscribe(fn):
     subscription = Subscription(fn)
     subscriptions.append(subscription)
-    return fn
+    return subscription
 
 
 def unsubscribe(fn):

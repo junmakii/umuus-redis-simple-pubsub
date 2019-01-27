@@ -79,6 +79,18 @@ Usage
     4) "{'error': TypeError("can't multiply sequence by non-int of type 'float'")}"
 
 
+----
+
+
+@subscribe()
+def f(x, y): return x * y
+
+
+import threading; threading.Thread(target=lambda: listen()).start()
+
+f.dispatch(x=2, y=2).wait()  # 4
+
+
 Authors
 -------
 
