@@ -33,12 +33,12 @@ Usage
 
     $ python -m umuus_redis_simple_pubsub run --options '{"paths": ["example:f", "example:g"]}'
 
-    ----
+----
 
     umuus_redis_simple_pubsub.from_modules(['example'])
     umuus_redis_simple_pubsub.from_paths(['example:f'])
 
-    ----
+----
 
 
     @umuus_redis_simple_pubsub.subscribe()
@@ -53,7 +53,7 @@ Usage
 
     umuus_redis_simple_pubsub.run()
 
-    ----
+----
 
     $ redis-cli PSUBSCRIBE '*' &
 
@@ -69,7 +69,7 @@ Usage
     3) "example:func:on_completed:12345678"
     4) "{"data": 6.0}"
 
-    ----
+----
 
     $ redis-cli PUBLISH 'example:func:on_next:12345678'   '{"x": 2.0, "y": "3.0"}'
 

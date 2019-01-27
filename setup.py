@@ -84,12 +84,12 @@ setup(
  '    $ python -m umuus_redis_simple_pubsub run --options \'{"paths": '
  '["example:f", "example:g"]}\'\n'
  '\n'
- '    ----\n'
+ '----\n'
  '\n'
  "    umuus_redis_simple_pubsub.from_modules(['example'])\n"
  "    umuus_redis_simple_pubsub.from_paths(['example:f'])\n"
  '\n'
- '    ----\n'
+ '----\n'
  '\n'
  '\n'
  '    @umuus_redis_simple_pubsub.subscribe()\n'
@@ -104,7 +104,7 @@ setup(
  '\n'
  '    umuus_redis_simple_pubsub.run()\n'
  '\n'
- '    ----\n'
+ '----\n'
  '\n'
  "    $ redis-cli PSUBSCRIBE '*' &\n"
  '\n'
@@ -121,7 +121,7 @@ setup(
  '    3) "example:func:on_completed:12345678"\n'
  '    4) "{"data": 6.0}"\n'
  '\n'
- '    ----\n'
+ '----\n'
  '\n'
  '    $ redis-cli PUBLISH \'example:func:on_next:12345678\'   \'{"x": 2.0, '
  '"y": "3.0"}\'\n'
